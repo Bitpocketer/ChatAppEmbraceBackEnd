@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2c6d6a92-a1aa-4453-8c15-5215a44198e9" name="Default" comment="" />
+    <list default="true" id="2c6d6a92-a1aa-4453-8c15-5215a44198e9" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -42,8 +44,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+            <state relative-caret-position="45">
+              <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -233,23 +235,6 @@
               <item name="Task" type="b2602c69:ProjectViewProjectNode" />
               <item name="Task" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Task" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Task" type="462c0819:PsiDirectoryNode" />
-              <item name="Tstut" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Task" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Task" type="462c0819:PsiDirectoryNode" />
-              <item name="Tstut" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Task" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Task" type="462c0819:PsiDirectoryNode" />
-              <item name="Tstut" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -326,19 +311,18 @@
       <workItem from="1532769043427" duration="15679000" />
       <workItem from="1532854647876" duration="405000" />
       <workItem from="1532891398053" duration="197000" />
-      <workItem from="1532926915974" duration="12829000" />
+      <workItem from="1532926915974" duration="13626000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="249639000" />
+    <option name="totallyTimeSpent" value="250436000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TypeScript" order="11" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2015504" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2015504" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
@@ -346,7 +330,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.36783043" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.36783043" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -762,8 +746,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        <state relative-caret-position="45">
+          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
         </state>
       </provider>
     </entry>
