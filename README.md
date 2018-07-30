@@ -1,2 +1,2 @@
 # ChatAppEmbraceBackEnd
-This repository contains the backend code of app.
+This repository contains the backend and frontend  of app, backend is built with docker.
