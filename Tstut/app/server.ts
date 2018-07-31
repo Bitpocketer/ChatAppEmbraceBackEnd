@@ -36,7 +36,7 @@ app.use(cors());
 app.get('/',(req, res)=>{
     res.sendFile(path.join(__dirname ,'../build/index.html'));
 })
-// scheduleJob("testmessages");
+scheduleJob("testmessages");
 app.use(AuthenticationRouter);
 
 //Register routes with the app

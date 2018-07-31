@@ -27,7 +27,7 @@ export async  function testgetConversationOfUser(userid: number) : Promise<any> 
         ' from conversation' +
         ' inner join ' +
         ' (select distinct on (c_id) c_id, conversation_reply.time, conversation_reply.message' +
-        ' from conversation_reply' +
+        ' ,conversation_reply.sender, conversation_reply.recipient from conversation_reply' +
         ' order by c_id, conversation_reply.time desc' +
         ') messages on messages.c_id = conversation.id' +
         ' inner join chatusers on conversation.user_two = chatusers.id' +
