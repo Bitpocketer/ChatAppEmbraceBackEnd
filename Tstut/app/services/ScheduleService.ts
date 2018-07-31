@@ -37,17 +37,17 @@ export function scheduleJob(messages) {
             let v = messagesDb.map(async (m, index) => {
                 if (index != messagesDb.length - 1) {
                     m.message = escape(m.message);
-                    values += `('` + m.message + `',` + `'` + m.ip + `','` + m.time + `',` + m.status + `,` + m.c_id + `),`;
+                    values += `('` + m.message + `',` + `'` + m.ip + `','` + m.time + `',` + m.status + `,` + m.c_id + `,'`+m.sender+`','`+m.recipient+`'),`;
                 } else {
                     m.message = escape(m.message);
-                    values += `('` + m.message + `',` + `'` + m.ip + `','` + m.time + `',` + m.status + `,` + m.c_id + `);`;
+                    values += `('` + m.message + `',` + `'` + m.ip + `','` + m.time + `',` + m.status + `,` + m.c_id + `,'`+m.sender+`','`+m.recipient+`');`;
                 }
 
             })
 
             Promise.all(v).then( ()=>{
                 console.log('generated values', values);
-                knex.raw('insert into conversation_reply (message, ip, time, status, c_id)  values '+values )
+                knex.raw('insert into conversation_reply (message, ip, time, status, c_id, sender, recipient)  values '+values )
                     .then(async ()=> {
                         console.log('record inserted')
                         await new RedisService().removeMessagesFromRedis()
@@ -75,4 +75,4 @@ export function scheduleJob(messages) {
     })
 }
 
-let validFields = ["message", "ip", "time", "status", "c_id", "status"]
+let validFields = ["message", "ip", "time", "status", "c_id", "status", "sender", "recipient"]

@@ -122,8 +122,8 @@ export function socketserver(server) {
                     let message = Message.createMessage(packet.message, address, new Date(), 1, conversationid, packet.sender, packet.recipient);
                     console.log('created message', message);
 
-                    let msgindb = await pushMessageIntoDB(message);
-                    console.log(msgindb);
+                    // let msgindb = await pushMessageIntoDB(message);
+                    // console.log(msgindb);
 
                     let messageinredis = Object.create(message);
                     messageinredis.sender = packet.sender;
@@ -162,7 +162,7 @@ export function socketserver(server) {
 
                     let message = Message.createMessage(packet.message, address, new Date(), 1, conversationId,packet.sender, packet.recipient);
 
-                    let msgindb = await pushMessageIntoDB(message);
+                    // let msgindb = await pushMessageIntoDB(message);
 
                     let messageinredis = Object.create(message);
                     messageinredis.sender = packet.sender;
@@ -180,8 +180,8 @@ export function socketserver(server) {
                         })
                     });
 
-                    console.log('message stored successfully for existing conversation');
-                    console.log(msgindb);
+                    // console.log('message stored successfully for existing conversation');
+                    // console.log(msgindb);
 
                     packet.c_id = conversationId;
                     socket.broadcast.to(reciverj.socketid).emit('privatemessage', packet)

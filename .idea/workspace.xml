@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2c6d6a92-a1aa-4453-8c15-5215a44198e9" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tstut/app/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tstut/app/services/ConversationService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/services/ConversationService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tstut/app/services/ScheduleService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/services/ScheduleService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tstut/app/services/SocketService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/services/SocketService.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -40,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SocketService.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SocketService.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tstut/app/services/SocketService.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="140" column="26" lean-forward="true" selection-start-line="140" selection-start-column="26" selection-end-line="140" selection-end-column="26" />
+            <state relative-caret-position="641">
+              <caret line="184" lean-forward="true" selection-start-line="184" selection-end-line="184" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -52,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScheduleService.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ScheduleService.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tstut/app/services/ScheduleService.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="55" column="67" selection-start-line="55" selection-start-column="67" selection-end-line="55" selection-end-column="67" />
+            <state relative-caret-position="621">
+              <caret line="77" column="94" selection-start-line="77" selection-start-column="94" selection-end-line="77" selection-end-column="94" />
               <folding>
                 <element signature="e#39#83#0" expanded="true" />
               </folding>
@@ -132,7 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fetched</find>
       <find>parsed m</find>
       <find>signin</find>
       <find>sign in</find>
@@ -162,6 +160,7 @@
       <find>pms</find>
       <find>update array</find>
       <find>privatemessage</find>
+      <find>required socket</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -197,11 +196,11 @@
         <option value="$PROJECT_DIR$/Tstut/app/services/UserService.ts" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Tstut/app/models/messagesModel.ts" />
-        <option value="$PROJECT_DIR$/Tstut/app/services/SocketService.ts" />
         <option value="$PROJECT_DIR$/chat-app-frontend/src/App.js" />
         <option value="$PROJECT_DIR$/Tstut/app/services/ConversationService.ts" />
         <option value="$PROJECT_DIR$/Tstut/app/server.ts" />
         <option value="$PROJECT_DIR$/Tstut/app/services/ScheduleService.ts" />
+        <option value="$PROJECT_DIR$/Tstut/app/services/SocketService.ts" />
       </list>
     </option>
   </component>
@@ -334,19 +333,19 @@
       <workItem from="1532854647876" duration="405000" />
       <workItem from="1532891398053" duration="197000" />
       <workItem from="1532926915974" duration="13626000" />
-      <workItem from="1532973586712" duration="21528000" />
+      <workItem from="1532973586712" duration="22723000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="274864000" />
+    <option name="totallyTimeSpent" value="276059000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TypeScript" order="11" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2015504" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2015504" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5010571" side_tool="true" weight="0.36783043" />
@@ -763,22 +762,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tstut/app/services/SocketService.ts">
+    <entry file="file://$PROJECT_DIR$/Tstut/app/services/ScheduleService.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="140" column="26" lean-forward="true" selection-start-line="140" selection-start-column="26" selection-end-line="140" selection-end-column="26" />
+        <state relative-caret-position="621">
+          <caret line="77" column="94" selection-start-line="77" selection-start-column="94" selection-end-line="77" selection-end-column="94" />
           <folding>
-            <element signature="e#0#44#0" expanded="true" />
+            <element signature="e#39#83#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tstut/app/services/ScheduleService.ts">
+    <entry file="file://$PROJECT_DIR$/Tstut/app/services/SocketService.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="55" column="67" selection-start-line="55" selection-start-column="67" selection-end-line="55" selection-end-column="67" />
+        <state relative-caret-position="641">
+          <caret line="184" lean-forward="true" selection-start-line="184" selection-end-line="184" />
           <folding>
-            <element signature="e#39#83#0" expanded="true" />
+            <element signature="e#0#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
