@@ -27,33 +27,12 @@ export function scheduleJob(messages) {
         let values="";
 
         let v= messagesDb.map(async(m, index)=> {
-            if(index!=messagesDb.length-1)
-            {
-                let msg = m.message;
-                let status = m.status;
-                let ip = m.ip;
-                let c_id = m.c_id;
-
-                if(msg.includes(`'`)){
-                    console.log(`msg includes '`, msg);
-                    // get all occurences of ' in msg
-                    let indexes = [], i = -1;
-
-                    while((i=msg.indexOf(`'`,i+1))!= -1) {
-                        indexes.push(i);
-                    }
-
-                    if(indexes.length>1) {
-                        //
-                        for(let i =0; i<indexes.length; i++) {
-
-                        }
-                    } else if(indexes.length===1) {
-                        msg.splice(indexes[0],0,`'`)
-                    }
-                 console.log(msg, 'changed after processing');
-                }
-
+            if(index!=messagesDb.length-1) {
+                m.message = escape(m.message);
+                values+=`('`+m.message+`',`+`'`+m.ip+`','`+m.time+`',`+m.status+`,`+m.c_id+`),`;
+            } else {
+                m.message = escape(m.message);
+                values+=`('`+m.message+`',`+`'`+m.ip+`','`+m.time+`',`+m.status+`,`+m.c_id+`);`;
             }
 
         })

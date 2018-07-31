@@ -57,7 +57,7 @@ class App extends Component {
             console.log('private message recieved ', packet)
             //check if conversation of a sender  is already added to the state
             this.setState({recipient: packet.sender})
-            let pm = {recipient: packet.user, sender: packet.sender, message: [packet.message]}
+            let pm = {recipient: packet.recipient, sender: packet.sender, message: [packet.message]}
             console.log('generatedpm on privatemessage', pm);
             this.setState({privatemessages: this.state.privatemessages.concat(pm)}, () => {
                 console.log('pms', this.state.privatemessages)
@@ -71,22 +71,28 @@ class App extends Component {
 
                 var user = packet.message.substring(0, indexofcolumn);
                 console.log('deducted user from message', user);
-                if (convo.user === user) {
+                if (convo.c_id === packet.c_id) {
 
                     senderadded = true;
+
                 }
             })
             //push to state only if the sender is not added to the list
+
             if (!senderadded) {
                 // deduct sender from packet and update the user property of packet
                 var indexofcolumn = packet.message.indexOf(":")
 
                 var user = packet.message.substring(0, indexofcolumn);
-                packet.user = user;
+                packet.sender = user;
+                console.log('packet sender', packet.sender);
+                console.log('packet recipient', packet.recipient);
                 this.setState({conversations: this.state.conversations.concat(packet)});
+                console.log('sender not added')
             }
             else {
                 // find the conversation of the sender and only update the message recieved (sounds hectic though fkit)
+                console.log('sender added');
                 let updatedarray = this.state.conversations;
                 this.state.conversations.map((convo, index) => {
 
@@ -94,16 +100,16 @@ class App extends Component {
 
                     var user = packet.message.substring(0, indexofcolumn);
 
-                    if (convo.user === user) {
+                    if (convo.sender === user || convo.recipient=== user) {
                         //find the convesation of this sender in the state and update only message,
-                        var requiredconversation = this.state.conversations.find(con => con.user === convo.user);
+                        var requiredconversation = this.state.conversations.find(con => con.sender === convo.sender||convo.recipient);
                         console.log('required conversation', requiredconversation);
                         requiredconversation.message = packet.message;
                         updatedarray[index] = requiredconversation;
                     }
                 });
                 console.log('update array', updatedarray);
-                this.setState({conversation: updatedarray});
+                this.setState({conversations: updatedarray});
             }
         }.bind(this))
         // socket.emit('message', this.state.message);
@@ -151,6 +157,10 @@ class App extends Component {
             });
         })
 
+        socket.on('conversationcreated', (packet)=>{
+            this.setState({conversations: this.state.conversations.concat(packet)});
+        })
+
         socket.on('disconnect', () => {
             // socket.connect();
             // console.log('socket disconnected', socket);
@@ -188,7 +198,8 @@ class App extends Component {
             let msg;
             if (typeof conversation.message !== 'undefined') {
                 // console.log('untrimmed message', conversation.message);
-                conmessage = conversation.message;
+                conmessage = decodeURIComponent(conversation.message);
+                console.log('decoded message', conmessage);
                 var indexofcolumn = conmessage.indexOf(":")
 
                 msg = conmessage.substring(indexofcolumn + 1, conmessage.length);
@@ -299,13 +310,13 @@ class App extends Component {
 
         let packet = {
             message: message,
-            user: recipient,
+            recipient: recipient,
             sender: alias
         }
 
         socket.emit('privatemessage', packet);
         //update state for private messages
-        let pm = {sender: this.state.alias, recipient: packet.user, message: [packet.message]}
+        let pm = {sender: this.state.alias, recipient: packet.recipient, message: [packet.message]}
         this.setState({privatemessages: this.state.privatemessages.concat(pm)}, () => {
             console.log('pms', this.state.privatemessages)
         });
@@ -546,6 +557,7 @@ updateConversations(conversations) {
     //for loop for checking each conversation existance in state
     for(let i =0; i<conversations.length; i++) {
         //if conversation doesn't exist in state push into state
+        conversations[i].message = decodeURIComponent(conversations[i].message)
         if(this.conversationExist(conversations[i].c_id) === false) {
             //conversation does not exist, push into state
 

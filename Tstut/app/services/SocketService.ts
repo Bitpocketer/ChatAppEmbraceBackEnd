@@ -21,7 +21,7 @@ export function socketserver(server) {
             // console.log('resetting nick', nick);
 
             new RedisService().registerChatter(nick.nick, socket.id).then(async (result) => {
-                // console.log('result from redis', result);
+                console.log('result from redis', result);
 
                 if (result == 'user registered') {
 
@@ -29,7 +29,7 @@ export function socketserver(server) {
                     let length = await Rs.getListLength('chatters');
                     let chatters = await Rs.getAllChatters(length);
                     // console.log('length of chatters', length);
-                    // console.log('all chatters', chatters);
+                    console.log('all chatters', chatters);
                     // console.log('all chatters', chatters);
                     socket.emit('aliascreated', nick.nick);
 
@@ -61,7 +61,8 @@ export function socketserver(server) {
             let address = socket.handshake.address;
             console.log('socket address', address)
 
-            let conversationExist = await doesConversationExist(packet.user, packet.sender);
+            let conversationExist = await doesConversationExist(packet.recipient, packet.sender);
+            console.log('--------->> packet recieved', packet);
             console.log('conversation exists', conversationExist);
             // console.log('send this message to', packet);
             // socket.emit('privatemessage',packet.recipient);
@@ -76,7 +77,7 @@ export function socketserver(server) {
 
             let reciver = chatters.filter((user, index) => {
 
-                if (packet.user == JSON.parse(user).user) {
+                if (packet.recipient == JSON.parse(user).user) {
                     return JSON.parse(user);
                 }
             });
@@ -94,7 +95,7 @@ export function socketserver(server) {
 
                 let fullmessage = sender + message;
                 packet.message = fullmessage;
-                socket.broadcast.to(reciverj.socketid).emit('privatemessage', packet);
+                // socket.broadcast.to(reciverj.socketid).emit('privatemessage', packet);
 
                 // push conversation if the conversation does not exist
                 if (conversationExist == false) {
@@ -102,7 +103,7 @@ export function socketserver(server) {
                     console.log('sending parameters to getidsofchatters', packet.sender);
                     //first get ids of sender and recipient from database
 
-                    let ids = await getIdsOfChatters(packet.sender, packet.user);
+                    let ids = await getIdsOfChatters(packet.sender, packet.recipient);
 
                     let user1 = ids[0].id;
                     let user2 = ids[1].id;
@@ -118,7 +119,7 @@ export function socketserver(server) {
                     console.log('conversation created', conversationidarray);
                     let conversationid = conversationidarray.id;
 
-                    let message = Message.createMessage(packet.message, address, new Date(), 1, conversationid);
+                    let message = Message.createMessage(packet.message, address, new Date(), 1, conversationid, packet.sender, packet.recipient);
                     console.log('created message', message);
 
                     let msgindb = await pushMessageIntoDB(message);
@@ -126,7 +127,7 @@ export function socketserver(server) {
 
                     let messageinredis = Object.create(message);
                     messageinredis.sender = packet.sender;
-                    messageinredis.recipient = packet.user;
+                    messageinredis.recipient = packet.recipient;
                     messageinredis.time = message.time;
                     messageinredis.status = message.status;
                     messageinredis.c_id = message.c_id;
@@ -140,12 +141,15 @@ export function socketserver(server) {
                         })
                     });
 
-                    //now push messasges agains this created conversationid into conversation_reply table
+                    //now push messasges agains this created conversationid into conversation_reply
+                    packet.c_id = conversationid;
+                    socket.broadcast.to(reciverj.socketid).emit('privatemessage', packet);
+                    setTimeout(()=>{socket.emit('conversationcreated',packet);},2000)
 
                 } else {
 
                     //just find the id of conversation and push message into db against that conversation
-                    let ids = await getIdsOfChatters(packet.sender, packet.user);
+                    let ids = await getIdsOfChatters(packet.sender, packet.recipient);
 
                     let user1 = ids[0].id;
                     let user2 = ids[1].id;
@@ -154,14 +158,15 @@ export function socketserver(server) {
                     console.log('required conversationid', conversation[0].id);
 
                     let conversationId = conversation[0].id;
+                    console.log('conversationId', conversationId);
 
-                    let message = Message.createMessage(packet.message, address, new Date(), 1, conversationId);
+                    let message = Message.createMessage(packet.message, address, new Date(), 1, conversationId,packet.sender, packet.recipient);
 
                     let msgindb = await pushMessageIntoDB(message);
 
                     let messageinredis = Object.create(message);
                     messageinredis.sender = packet.sender;
-                    messageinredis.recipient = packet.user;
+                    messageinredis.recipient = packet.recipient;
                     messageinredis.time = message.time;
                     messageinredis.status = message.status;
                     messageinredis.c_id = message.c_id;
@@ -177,6 +182,9 @@ export function socketserver(server) {
 
                     console.log('message stored successfully for existing conversation');
                     console.log(msgindb);
+
+                    packet.c_id = conversationId;
+                    socket.broadcast.to(reciverj.socketid).emit('privatemessage', packet)
                 }
             } else {
                 //if the user is not found from redis that means he's offline  push the message into queue
@@ -193,7 +201,7 @@ export function socketserver(server) {
 
                 //get conversation id of these users
 
-                let ids = await getIdsOfChatters(packet.sender, packet.user);
+                let ids = await getIdsOfChatters(packet.sender, packet.recipient);
 
                 let user1 = ids[0].id;
                 let user2 = ids[1].id;
@@ -203,12 +211,12 @@ export function socketserver(server) {
 
                 let conversationId = conversation[0].id;
 
-                let msg =  Message.createMessage(packet.message, address, new Date(), 1, conversationId);
+                let msg =  Message.createMessage(packet.message, address, new Date(), 1, conversationId, packet.sender, packet.recipient);
 
                 // let msgindb = await pushMessageIntoDB(msg);
                 let messageinredis = Object.create(msg);
                 messageinredis.sender = packet.sender;
-                messageinredis.recipient = packet.user;
+                messageinredis.recipient = packet.recipient;
                 messageinredis.time = msg.time;
                 messageinredis.status = msg.status;
                 messageinredis.c_id = msg.c_id;

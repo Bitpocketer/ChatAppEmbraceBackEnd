@@ -6,8 +6,10 @@ export class Message {
     time: Date;
     status: number;
     c_id: number;
+    sender: string;
+    recipient: string;
 
-    static createMessage(message:string , ip:string,  time: Date, status: number, cid: number ): Message {
+    static createMessage(message:string , ip:string,  time: Date, status: number, cid: number, sender: string, recipient:string ): Message {
 
         let msg = new Message();
 
@@ -16,6 +18,8 @@ export class Message {
         msg.time = time;
         msg.status = status;
         msg.c_id = cid;
+        msg.sender = sender;
+        msg.recipient = recipient;
 
         return  msg;
     }
