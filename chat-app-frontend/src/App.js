@@ -38,7 +38,8 @@ class App extends Component {
             recipient: '',
             conversations: [],
             privatemessages: [],
-            authenticated: false
+            authenticated: false,
+            activeconversation:''
         }
     }
 
@@ -57,7 +58,7 @@ class App extends Component {
             console.log('private message recieved ', packet)
             //check if conversation of a sender  is already added to the state
             this.setState({recipient: packet.sender})
-            let pm = {recipient: packet.recipient, sender: packet.sender, message: [packet.message]}
+            let pm = {recipient: packet.recipient, sender: packet.sender, message: [packet.message],c_id:packet.c_id}
             console.log('generatedpm on privatemessage', pm);
             this.setState({privatemessages: this.state.privatemessages.concat(pm)}, () => {
                 console.log('pms', this.state.privatemessages)
@@ -175,8 +176,8 @@ class App extends Component {
 
         var PrivateMessages = this.state.privatemessages.map((conversation, index) => {
 
-            if ((conversation.sender === this.state.alias || conversation.recipient === this.state.alias) && (conversation.sender === this.state.alias || conversation.sender === this.state.recipient)) {
-
+            // if ((conversation.sender === this.state.alias || conversation.recipient === this.state.alias) && (conversation.sender === this.state.alias || conversation.sender === this.state.recipient)) {
+                if(conversation.c_id===this.state.activeconversation){
                 let list = conversation.message.map((msg, index) => {
                     // console.log('message of pm',msg);
                     return <Renderlist listitem={msg} key={index}/>
@@ -199,7 +200,6 @@ class App extends Component {
             if (typeof conversation.message !== 'undefined') {
                 // console.log('untrimmed message', conversation.message);
                 conmessage = decodeURIComponent(conversation.message);
-                console.log('decoded message', conmessage);
                 var indexofcolumn = conmessage.indexOf(":")
 
                 msg = conmessage.substring(indexofcolumn + 1, conmessage.length);
@@ -215,7 +215,8 @@ class App extends Component {
 
             if(conversation.sender === this.state.alias || conversation.recipient === this.state.alias) {
                 return <ConversationItem sender = {conversation.sender===this.state.alias?conversation.recipient:conversation.sender} conversationId = {conversation.c_id}
-                                         message = {msg} openmodal = {this.openchatmodal.bind(this)} key={conversation.c_id}/>
+                                         message = {msg} openmodal = {this.openchatmodal.bind(this)} key={conversation.c_id}
+                                          conversationId ={conversation.c_id}  />
             }
 
 
@@ -316,7 +317,7 @@ class App extends Component {
 
         socket.emit('privatemessage', packet);
         //update state for private messages
-        let pm = {sender: this.state.alias, recipient: packet.recipient, message: [packet.message]}
+        let pm = {sender: this.state.alias, recipient: packet.recipient, message: [packet.message],c_id:this.state.activeconversation}
         this.setState({privatemessages: this.state.privatemessages.concat(pm)}, () => {
             console.log('pms', this.state.privatemessages)
         });
@@ -462,13 +463,16 @@ class App extends Component {
         })
     }
 
-    openchatmodal(e) {
+    openchatmodal(e, conversationId) {
+        console.log('conversationId in openchatmodel',conversationId);
         let target = e.target;
         let recipient = target.innerHTML;
+        this.setState({activeconversation:conversationId});
         this.setState({recipient: recipient}, () => {
 
-            if (this.state.authenticated) {
-                // this.fetchMessage(this.state.alias,this.state.recipient);
+            if (this.state.authenticated && this.state.fetchpm===true) {
+
+                this.fetchMessage(this.state.alias,this.state.recipient);
             }
         });
         openmodal();
@@ -506,7 +510,10 @@ class App extends Component {
             success: function (messages) {
                 // console.log('these are messages between '+this.state.alias + 'and '+this.state.recipient, messages);
                 console.log(this.state.alias, messages);
-                let pm = {recipient: this.state.alias, sender: this.state.recipient, message: messages}
+                let unescappedmessages = messages.map((msg)=>{
+                    return decodeURIComponent(msg);
+                })
+                let pm = {recipient: this.state.alias, sender: this.state.recipient, message: unescappedmessages}
                 // console.log('generated pm', pm);
                 this.setState({privatemessages: this.state.privatemessages.concat(pm)});
             }.bind(this),
@@ -532,16 +539,24 @@ class App extends Component {
             type: 'post',
             dataType: 'json',
             data: cids,
-            success: function (messages) {
+            success:  (messages,status,XMLHttpRequest )=> {
                 console.log('conversations fetched from redis', messages);
                 // this.updatePrivateMessages(messages)
+                // console.log('xmlhttp',XMLHttpRequest.getAllResponseHeaders());
+                let headers= XMLHttpRequest.getAllResponseHeaders();
+
+                if(XMLHttpRequest.getResponseHeader('fetchpm')==1) {
+                    this.setState({fetchpm:true})
+                }
+                // console.log('xmlHTTp')
+                // console.log('messages', messages);
                 return messages;
             },
             err: function (error) {
                 console.log('error in fetching messages from redis', error);
             }
         }).then((messages) => {
-            console.log('then messages',messages);
+            // console.log('then messages',messages);
             this.updateConversations(messages);
             this.updatePrivateMessages(messages);
         })
@@ -578,7 +593,7 @@ updateConversations(conversations) {
                     // break loop1;
                 }
             }
-            console.log('latest message of ',conversations[i].c_id,' ', latestmessage);
+            // console.log('latest message of ',conversations[i].c_id,' ', latestmessage);
              this.state.conversations.map((conv,index)=>{
                 if(conv.c_id === conversations[i].c_id) {
                     conv = latestmessage;
@@ -613,8 +628,8 @@ updateConversations(conversations) {
 
     updatePrivateMessages(messages) {
         // console.log('push these message into private messages', messages);
-        for (let i = 0; i < messages.length; i++) {
-            let pm = {recipient: messages[i].recipient, sender: messages[i].sender, message: [messages[i].message]}
+        for (let i=messages.length-1 ; i >=  0; i--) {
+            let pm = {recipient: messages[i].recipient, sender: messages[i].sender, message: [messages[i].message], c_id:messages[i].c_id}
             this.setState({privatemessages: this.state.privatemessages.concat(pm)});
         }
     }

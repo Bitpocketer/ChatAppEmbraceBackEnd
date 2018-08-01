@@ -56,20 +56,53 @@ export class RedisService {
     }
 
     async messagesQueue(message) {
-        //wheather to stringify it or not?
-        return this.client.lpushAsync('messages',JSON.stringify(message)).then((res:any)=>{
-            console.log('messages queue response', res);
-            return "message pushed into the queue"
-        }).catch((error)=> {
+        let messagescount = await this.client.zcountAsync('messagesset',Number.NEGATIVE_INFINITY,Number.POSITIVE_INFINITY).then(res=>{return res});
+        console.log('messagescount', messagescount);
+        message.rank=messagescount;
+        return this.client.zaddAsync('messagesset',messagescount,JSON.stringify(message)).then(res=>{
+            return "message pushed into sortedset"
+        }).catch((error)=>{
             console.log('error');
         })
+
+        //wheather to stringify it or not?
+        // return this.client.lpushAsync('messages',JSON.stringify(message)).then((res:any)=>{
+        //     console.log('messages queue response', res);
+        //     return "message pushed into the queue"
+        // }).catch((error)=> {
+        //     console.log('error');
+        // })
     }
 
     async  getAllMessages() {
-        let messageLength = await this.getListLength('messages')
-        return this.client.lrangeAsync('messages',0, messageLength).then((res: any)=>{
+        // let messageLength = await this.getListLength('messages')
+        // return this.client.lrangeAsync('messages',0, messageLength).then((res: any)=>{
+        //     return res;
+        // });
+        //remove it later,
+
+        return this.client.zrangeAsync('messagesset',0,-1).then(res=>{
             return res;
-        });
+        })
+
+
+    }
+
+    async updateMessageStatus(message) {
+        console.log('message in updateMessagesStatus', message);
+        let jm=message;
+        // jm.savedinDb=true
+        message.message = decodeURIComponent(message.message);
+        message= JSON.stringify(message)
+        console.log('remove this message', message);
+      await this.client.zremAsync('messagesset',message).then(async (res)=>{console.log("message deleted", res)
+      if(res===1){
+          message=JSON.parse(message);
+          jm.savedinDb=true;
+          await this.client.zaddAsync('messagesset',jm.rank,JSON.stringify(jm)).then(res=>{console.log('message updated', res)});
+      }});
+
+
 
     }
 

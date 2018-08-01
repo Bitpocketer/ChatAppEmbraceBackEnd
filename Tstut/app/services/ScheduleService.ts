@@ -11,7 +11,7 @@ export function scheduleJob(messages) {
 
         //get all conversations from reds and copy into database
         let messages = await new RedisService().getAllMessages()
-        // console.log('messages in scheduler', messages);
+        console.log('messages in scheduler', messages);
 
         let readytoinsert = messages.filter((message, index)=> {
             // console.log('message in map', message);
@@ -50,18 +50,21 @@ export function scheduleJob(messages) {
                 knex.raw('insert into conversation_reply (message, ip, time, status, c_id, sender, recipient)  values '+values )
                     .then(async ()=> {
                         console.log('record inserted')
-                        await new RedisService().removeMessagesFromRedis()
-                            .then((result)=>{
+                        let messagesbackup = await  new RedisService().getAllMessages();
 
-                                let updatedredisrecord = messagesDb.map(async (msg,index)=>{
 
-                                    msg.savedinDb = true;
-                                   await new RedisService().messagesQueue(msg)
+                        let updatedredisrecord = messagesDb.map(async (msg, index) => {
+                            //find index of each message by it's rank and update msg.savedInDb
+                            await new RedisService().updateMessageStatus(msg);
 
-                                })
 
-                                Promise.all(updatedredisrecord).then(()=>{console.log('updated records in redis')})
-                            });
+                        })
+
+                        Promise.all(updatedredisrecord).then(() => {
+                            console.log('updated records in redis')
+                        })
+
+
                     })
                     .catch((e)=>{ console.log('error occured',e)})
             })
@@ -75,4 +78,4 @@ export function scheduleJob(messages) {
     })
 }
 
-let validFields = ["message", "ip", "time", "status", "c_id", "status", "sender", "recipient"]
+let validFields = ["message", "ip", "time", "status", "c_id", "status", "sender", "recipient","rank"]

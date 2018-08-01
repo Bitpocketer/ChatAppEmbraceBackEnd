@@ -126,13 +126,14 @@ export function socketserver(server) {
                     // console.log(msgindb);
 
                     let messageinredis = Object.create(message);
-                    messageinredis.sender = packet.sender;
-                    messageinredis.recipient = packet.recipient;
+
+                    messageinredis.message = message.message;
+                    messageinredis.ip = message.ip;
                     messageinredis.time = message.time;
                     messageinredis.status = message.status;
                     messageinredis.c_id = message.c_id;
-                    messageinredis.ip = message.ip;
-                    messageinredis.message = message.message;
+                    messageinredis.sender = packet.sender;
+                    messageinredis.recipient = packet.recipient;
 
 
                     new RedisService().messagesQueue(messageinredis).then(async (resp)=>{
@@ -165,14 +166,13 @@ export function socketserver(server) {
                     // let msgindb = await pushMessageIntoDB(message);
 
                     let messageinredis = Object.create(message);
-                    messageinredis.sender = packet.sender;
-                    messageinredis.recipient = packet.recipient;
+                    messageinredis.message = message.message;
+                    messageinredis.ip = message.ip;
                     messageinredis.time = message.time;
                     messageinredis.status = message.status;
                     messageinredis.c_id = message.c_id;
-                    messageinredis.ip = message.ip;
-                    messageinredis.message = message.message;
-
+                    messageinredis.sender = packet.sender;
+                    messageinredis.recipient = packet.recipient;
 
                     new RedisService().messagesQueue(messageinredis).then(async (resp)=>{
                         await new RedisService().getAllMessages().then(res=>{
@@ -215,13 +215,18 @@ export function socketserver(server) {
 
                 // let msgindb = await pushMessageIntoDB(msg);
                 let messageinredis = Object.create(msg);
-                messageinredis.sender = packet.sender;
-                messageinredis.recipient = packet.recipient;
+                messageinredis.message = msg.message;
+                messageinredis.ip = msg.ip;
                 messageinredis.time = msg.time;
                 messageinredis.status = msg.status;
                 messageinredis.c_id = msg.c_id;
-                messageinredis.ip = msg.ip;
-                messageinredis.message = msg.message;
+                messageinredis.sender = packet.sender;
+                messageinredis.recipient = packet.recipient;
+
+
+
+
+
                 new RedisService().messagesQueue(messageinredis).then(async (resp)=>{
                    let msgs = await new RedisService().getAllMessages().then(res=>{
                        console.log('msgs from redis', res);

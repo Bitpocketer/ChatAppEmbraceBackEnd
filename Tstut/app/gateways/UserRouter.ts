@@ -48,6 +48,8 @@ UserRouter.post('/api/userconversationsfromredis', async (req: Request, res: Res
         }
         else {
             console.log('redis conversation not found, requesting database')
+            res.setHeader('fetchpm',1);
+            res.header("Access-Control-Expose-Headers", "fetchpm");
         res.json(await UserService.getUserConversations(req.body.alias)).status(200);
         }
 
