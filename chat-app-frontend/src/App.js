@@ -20,8 +20,9 @@ import Renderlist from "./Views/Message";
 import UserList from "./Views/UserList";
 import ConversationItem from "./Views/ConversationItem";
 import $ from 'jquery';
+import {api} from './apiconfig';
 
-let socket = io("http://localhost:3000/public", {reconnect: true});
+let socket = io(api.url+"public", {reconnect: true});
 
 // let socket = io('http://316c3271.ngrok.io');
 
@@ -39,7 +40,8 @@ class App extends Component {
             conversations: [],
             privatemessages: [],
             authenticated: false,
-            activeconversation:''
+            activeconversation:'',
+            firstmessageadded: false
         }
     }
 
@@ -60,9 +62,14 @@ class App extends Component {
             this.setState({recipient: packet.sender})
             let pm = {recipient: packet.recipient, sender: packet.sender, message: [packet.message],c_id:packet.c_id}
             console.log('generatedpm on privatemessage', pm);
-            this.setState({privatemessages: this.state.privatemessages.concat(pm)}, () => {
-                console.log('pms', this.state.privatemessages)
-            });
+            if(pm.recipient===this.state.alias){
+                this.setState({firstmessageadded:true})
+            }
+            if(this.state.firstmessageadded === true) {
+                this.setState({privatemessages: this.state.privatemessages.concat(pm)}, () => {
+                    console.log('pms', this.state.privatemessages)
+                });
+            }
 
             let senderadded = false;
 
@@ -159,7 +166,11 @@ class App extends Component {
         })
 
         socket.on('conversationcreated', (packet)=>{
+            console.log('packet on conversation created', packet);
+            let pm = {sender: this.state.alias, recipient: packet.recipient, message: [packet.message],c_id:packet.c_id}
+            this.setState({privatemessages:this.state.privatemessages.concat(pm)});
             this.setState({conversations: this.state.conversations.concat(packet),activeconversation:packet.c_id});
+            this.setState({firstmessageadded:true})
         })
 
         socket.on('disconnect', () => {
@@ -317,11 +328,18 @@ class App extends Component {
 
         socket.emit('privatemessage', packet);
         //update state for private messages
-        let pm = {sender: this.state.alias, recipient: packet.recipient, message: [packet.message],c_id:this.state.activeconversation}
-        this.setState({privatemessages: this.state.privatemessages.concat(pm)}, () => {
-            console.log('pms', this.state.privatemessages)
-        });
-        this.updateConversationMessage(pm);
+        if(this.state.activeconversation!=="") {
+            let pm = {
+                sender: this.state.alias,
+                recipient: packet.recipient,
+                message: [packet.message],
+                c_id: this.state.activeconversation
+            }
+            this.setState({privatemessages: this.state.privatemessages.concat(pm)}, () => {
+                console.log('pms', this.state.privatemessages)
+            });
+            this.updateConversationMessage(pm);
+        }
     }
 
     composeMessage(e) {
@@ -408,7 +426,7 @@ class App extends Component {
 
         // console.log('sign in here', user);
         $.ajax({
-            url: 'http://localhost:3000/api/authenticate',
+            url:api.url+'api/authenticate',
             dataType: 'JSON',
             data: user,
             type: 'POST',
@@ -446,7 +464,7 @@ class App extends Component {
     signup(user) {
 
         $.ajax({
-            url: 'http://localhost:3000/api/create',
+            url: api.url+'api/create',
             dataType: 'JSON',
             data: user,
             type: 'POST',
@@ -502,7 +520,7 @@ class App extends Component {
             recipient: recipient
         }
         $.ajax({
-            url: 'http://localhost:3000/api/getmessages',
+            url: api.url+'api/getmessages',
             type: 'POST',
             data: chatters,
 
@@ -533,7 +551,7 @@ class App extends Component {
         let cids = {cids: conversationids, alias: this.state.alias}
 
         $.ajax({
-            url: 'http://localhost:3000/api/userconversationsfromredis',
+            url: api.url+'api/userconversationsfromredis',
             type: 'post',
             dataType: 'json',
             data: cids,
@@ -622,10 +640,17 @@ updateConversations(conversations) {
 
     updatePrivateMessages(messages) {
         // console.log('push these message into private messages', messages);
-        for (let i=messages.length-1 ; i >=  0; i--) {
-            let pm = {recipient: messages[i].recipient, sender: messages[i].sender, message: [messages[i].message], c_id:messages[i].c_id}
-            this.setState({privatemessages: this.state.privatemessages.concat(pm)});
-        }
+
+            for (let i = messages.length - 1; i >= 0; i--) {
+                let pm = {
+                    recipient: messages[i].recipient,
+                    sender: messages[i].sender,
+                    message: [messages[i].message],
+                    c_id: messages[i].c_id
+                }
+                this.setState({privatemessages: this.state.privatemessages.concat(pm)});
+            }
+
     }
 
     updateConversationMessage(message) {

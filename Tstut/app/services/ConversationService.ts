@@ -79,7 +79,7 @@ export async function messagesBetweenUserAndRecipient(alias: string, recipient: 
         ' inner join chatusers on chatusers.id = c2.user_one or chatusers.id = c2.user_two' +
         ` where chatusers.name = '`+alias+ `'`+ `and ( c2.user_two = `+recipient+ `or c2.user_one =`+recipient+`)`)
         .then((result)=> {
-            console.log('------>A&B conversation<-----------',result);
+
             let messages = result.rows.map((row,index)=>{
                 return row;
             })

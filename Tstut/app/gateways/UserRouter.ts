@@ -43,8 +43,15 @@ UserRouter.post('/api/userconversationsfromredis', async (req: Request, res: Res
 
         if(userOfflineMessages.length!=0) {
             // console.log('userOfflinemessages from redis', userOfflineMessages);
-            // console.log('redisconversation found');
-            res.json(userOfflineMessages).status(200);
+            if(userOfflineMessages.length<5) {
+                res.setHeader('fetchpm',1);
+                res.header("Access-Control-Expose-Headers", "fetchpm");
+                res.json(await UserService.getUserConversations(req.body.alias)).status(200);
+            } else {
+                console.log('returning from redis');
+                res.json(userOfflineMessages).status(200);
+            }
+
         }
         else {
             console.log('redis conversation not found, requesting database')

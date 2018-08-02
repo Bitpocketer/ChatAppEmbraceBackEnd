@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c6d6a92-a1aa-4453-8c15-5215a44198e9" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/chat-app-frontend/src/apiconfig.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tstut/app/gateways/UserRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/gateways/UserRouter.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tstut/app/services/ConversationService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/services/ConversationService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tstut/app/services/RedisService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/services/RedisService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tstut/app/services/ScheduleService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/services/ScheduleService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-app-frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/chat-app-frontend/src/App.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,47 +23,20 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="512" column="63" selection-start-line="512" selection-start-column="63" selection-end-line="512" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SocketService.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tstut/app/services/SocketService.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1242">
-              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RedisService.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tstut/app/services/RedisService.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="961">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScheduleService.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tstut/app/services/ScheduleService.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="216">
+              <caret line="65" column="49" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
               <folding>
-                <element signature="e#39#83#0" expanded="true" />
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tstut/package.json">
+      <file leaf-file-name="apiconfig.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/apiconfig.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+            <state relative-caret-position="15">
+              <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -71,8 +44,17 @@
       <file leaf-file-name="UserRouter.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tstut/app/gateways/UserRouter.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="64" column="35" lean-forward="true" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
+            <state relative-caret-position="269">
+              <caret line="50" column="52" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SocketService.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tstut/app/services/SocketService.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
             </state>
           </provider>
         </entry>
@@ -80,8 +62,8 @@
       <file leaf-file-name="UserService.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tstut/app/services/UserService.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="45" column="54" selection-start-line="45" selection-start-column="54" selection-end-line="45" selection-end-column="54" />
+            <state relative-caret-position="30">
+              <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -89,26 +71,17 @@
       <file leaf-file-name="ConversationService.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tstut/app/services/ConversationService.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="72" column="22" selection-start-line="72" selection-start-column="22" selection-end-line="72" selection-end-column="22" />
+            <state relative-caret-position="154">
+              <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuthenticationRouter.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tstut/app/gateways/AuthenticationRouter.ts">
+      <file leaf-file-name="RedisService.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tstut/app/services/RedisService.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RedisRouter.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tstut/app/gateways/RedisRouter.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="569">
+              <caret line="115" column="10" selection-start-line="115" selection-start-column="10" selection-end-line="115" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -124,15 +97,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>indexof</find>
-      <find>userconversation</find>
-      <find>required sock</find>
-      <find>conversation exists</find>
-      <find>packet.user</find>
-      <find>pushmessageintoDB</find>
-      <find>sendprivate</find>
-      <find>store into redis here</find>
-      <find>conversationcreated</find>
       <find>this.state.conversation</find>
       <find>private message</find>
       <find>pms</find>
@@ -154,6 +118,15 @@
       <find>fetchpm</find>
       <find>openchat</find>
       <find>privatemessage</find>
+      <find>signin</find>
+      <find>url</find>
+      <find>redis</find>
+      <find>api</find>
+      <find>userconversationsfromredis</find>
+      <find>alias created</find>
+      <find>alias create</find>
+      <find>conversationcreated</find>
+      <find>private</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -189,13 +162,14 @@
         <option value="$PROJECT_DIR$/Tstut/migrations/20180731140719-chattersTable.js" />
         <option value="$PROJECT_DIR$/Tstut/migrations/20180731140759-conversationsTable.js" />
         <option value="$PROJECT_DIR$/Tstut/migrations/20180731140737-coversation-replyTable.js" />
-        <option value="$PROJECT_DIR$/Tstut/app/gateways/UserRouter.ts" />
         <option value="$PROJECT_DIR$/Tstut/app/server.ts" />
         <option value="$PROJECT_DIR$/chat-app-frontend/src/Views/ConversationItem.js" />
         <option value="$PROJECT_DIR$/Tstut/app/services/ScheduleService.ts" />
         <option value="$PROJECT_DIR$/Tstut/app/services/SocketService.ts" />
         <option value="$PROJECT_DIR$/Tstut/app/services/RedisService.ts" />
+        <option value="$PROJECT_DIR$/chat-app-frontend/src/apiconfig.js" />
         <option value="$PROJECT_DIR$/Tstut/app/services/ConversationService.ts" />
+        <option value="$PROJECT_DIR$/Tstut/app/gateways/UserRouter.ts" />
         <option value="$PROJECT_DIR$/chat-app-frontend/src/App.js" />
       </list>
     </option>
@@ -340,7 +314,7 @@
               <item name="Task" type="462c0819:PsiDirectoryNode" />
               <item name="Tstut" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="gateways" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -424,12 +398,12 @@
       <workItem from="1533098083312" duration="18237000" />
       <workItem from="1533138804032" duration="189000" />
       <workItem from="1533144630600" duration="190000" />
-      <workItem from="1533187068279" duration="5781000" />
+      <workItem from="1533187068279" duration="13504000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="305760000" />
+    <option name="totallyTimeSpent" value="313483000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -498,20 +472,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/style/App.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="75" column="23" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/custom/customjs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="27" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tstut/app/services/SocketService.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -611,20 +571,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/Views/Userlist" />
-    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/Views/Message.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/Views/UserList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="39" selection-start-column="39" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tstut/tests/testserver.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -664,13 +610,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="517">
           <caret line="44" column="1" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/Views/LoginForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1815">
-          <caret line="123" selection-start-line="123" selection-end-line="123" />
         </state>
       </provider>
     </entry>
@@ -775,13 +714,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/Views/ConversationItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tstut/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -813,45 +745,92 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tstut/app/services/RedisService.ts">
+    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/Views/LoginForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="961">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        <state relative-caret-position="406">
+          <caret line="123" selection-start-line="123" selection-end-line="123" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tstut/app/services/SocketService.ts">
+    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/Views/Message.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1242">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="105">
+          <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/Views/UserList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="39" selection-start-column="39" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/Views/ConversationItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tstut/app/services/RedisService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="115" column="10" selection-start-line="115" selection-start-column="10" selection-end-line="115" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tstut/app/services/ConversationService.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="72" column="22" selection-start-line="72" selection-start-column="22" selection-end-line="72" selection-end-column="22" />
+        <state relative-caret-position="154">
+          <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tstut/app/services/UserService.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="45" column="54" selection-start-line="45" selection-start-column="54" selection-end-line="45" selection-end-column="54" />
+        <state relative-caret-position="30">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/apiconfig.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tstut/app/gateways/UserRouter.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="64" column="35" lean-forward="true" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
+        <state relative-caret-position="269">
+          <caret line="50" column="52" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tstut/app/services/SocketService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="512" column="63" selection-start-line="512" selection-start-column="63" selection-end-line="512" selection-end-column="63" />
+        <state relative-caret-position="216">
+          <caret line="65" column="49" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
