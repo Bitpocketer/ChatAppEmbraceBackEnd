@@ -74,14 +74,14 @@ export async function messagesBetweenUserAndRecipient(alias: string, recipient: 
 
     // console.log('alias in messagesbetweenuserRecipient ',  alias);
 
-    let messages = await knex.raw('select conversation_reply.message from conversation_reply' +
+    let messages = await knex.raw('select conversation_reply.message, conversation_reply.c_id from conversation_reply' +
         ' inner join conversation c2 on c2.id = conversation_reply.c_id ' +
         ' inner join chatusers on chatusers.id = c2.user_one or chatusers.id = c2.user_two' +
         ` where chatusers.name = '`+alias+ `'`+ `and ( c2.user_two = `+recipient+ `or c2.user_one =`+recipient+`)`)
         .then((result)=> {
-            // return result.rows;
+            console.log('------>A&B conversation<-----------',result);
             let messages = result.rows.map((row,index)=>{
-                return row.message;
+                return row;
             })
             return messages;
 

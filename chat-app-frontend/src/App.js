@@ -99,11 +99,11 @@ class App extends Component {
 
                     var indexofcolumn = packet.message.indexOf(":")
 
-                    var user = packet.message.substring(0, indexofcolumn);
+                    var c_id = packet.c_id;
 
-                    if (convo.sender === user || convo.recipient=== user) {
+                    if (convo.c_id === c_id ) {
                         //find the convesation of this sender in the state and update only message,
-                        var requiredconversation = this.state.conversations.find(con => con.sender === convo.sender||convo.recipient);
+                        var requiredconversation = this.state.conversations.find(con => con.c_id === convo.c_id);
                         console.log('required conversation', requiredconversation);
                         requiredconversation.message = packet.message;
                         updatedarray[index] = requiredconversation;
@@ -159,7 +159,7 @@ class App extends Component {
         })
 
         socket.on('conversationcreated', (packet)=>{
-            this.setState({conversations: this.state.conversations.concat(packet)});
+            this.setState({conversations: this.state.conversations.concat(packet),activeconversation:packet.c_id});
         })
 
         socket.on('disconnect', () => {
@@ -321,6 +321,7 @@ class App extends Component {
         this.setState({privatemessages: this.state.privatemessages.concat(pm)}, () => {
             console.log('pms', this.state.privatemessages)
         });
+        this.updateConversationMessage(pm);
     }
 
     composeMessage(e) {
@@ -425,11 +426,9 @@ class App extends Component {
                             // console.log('result from reconnection', result)
                         });
                         this.setState({authenticated: true})
-
                     }
-                    socket.emit('setnick', u);
-                    // this.fetchConversations(u);
 
+                    socket.emit('setnick', u);
                     showconversationview();
                     this.setState({authenticated: true})
                 }
@@ -439,13 +438,13 @@ class App extends Component {
                 }
             },
             err: (error) => {
-                // console.log('error in authentication', error);
+                console.log('error in authentication', error);
             }
         })
     }
 
     signup(user) {
-        // console.log('registering user', user);
+
         $.ajax({
             url: 'http://localhost:3000/api/create',
             dataType: 'JSON',
@@ -511,11 +510,13 @@ class App extends Component {
                 // console.log('these are messages between '+this.state.alias + 'and '+this.state.recipient, messages);
                 console.log(this.state.alias, messages);
                 let unescappedmessages = messages.map((msg)=>{
-                    return decodeURIComponent(msg);
+                    msg.message= decodeURIComponent(msg.message);
+
+                    let pm = {recipient: this.state.alias, sender: this.state.recipient, message: [msg.message],c_id:msg.c_id}
+                    // console.log('generated pm', pm);
+                    this.setState({privatemessages: this.state.privatemessages.concat(pm)});
                 })
-                let pm = {recipient: this.state.alias, sender: this.state.recipient, message: unescappedmessages}
-                // console.log('generated pm', pm);
-                this.setState({privatemessages: this.state.privatemessages.concat(pm)});
+
             }.bind(this),
             err: function (error) {
                 console.log('error occured while fetching messages', error);
@@ -531,9 +532,6 @@ class App extends Component {
         })
         let cids = {cids: conversationids, alias: this.state.alias}
 
-        // console.log('another request');
-
-        // console.log('conversationids',JSON.stringify(conversationids));
         $.ajax({
             url: 'http://localhost:3000/api/userconversationsfromredis',
             type: 'post',
@@ -541,22 +539,18 @@ class App extends Component {
             data: cids,
             success:  (messages,status,XMLHttpRequest )=> {
                 console.log('conversations fetched from redis', messages);
-                // this.updatePrivateMessages(messages)
-                // console.log('xmlhttp',XMLHttpRequest.getAllResponseHeaders());
-                let headers= XMLHttpRequest.getAllResponseHeaders();
 
                 if(XMLHttpRequest.getResponseHeader('fetchpm')==1) {
                     this.setState({fetchpm:true})
                 }
-                // console.log('xmlHTTp')
-                // console.log('messages', messages);
+
                 return messages;
             },
             err: function (error) {
                 console.log('error in fetching messages from redis', error);
             }
         }).then((messages) => {
-            // console.log('then messages',messages);
+
             this.updateConversations(messages);
             this.updatePrivateMessages(messages);
         })
@@ -590,7 +584,7 @@ updateConversations(conversations) {
             for(let lm=0; lm<conversations.length; lm++) {
                 if(conversations[i].c_id=== conversations[lm].c_id) {
                     latestmessage = conversations[lm];
-                    // break loop1;
+                    break loop1;
                 }
             }
             // console.log('latest message of ',conversations[i].c_id,' ', latestmessage);
@@ -632,6 +626,16 @@ updateConversations(conversations) {
             let pm = {recipient: messages[i].recipient, sender: messages[i].sender, message: [messages[i].message], c_id:messages[i].c_id}
             this.setState({privatemessages: this.state.privatemessages.concat(pm)});
         }
+    }
+
+    updateConversationMessage(message) {
+        console.log('updateConversationMessage called', message);
+        this.state.conversations.map((convo,index)=>{
+            if(convo.c_id===message.c_id) {
+                convo.message = message.message;
+                this.forceUpdate();
+            }
+        })
     }
 
 }
