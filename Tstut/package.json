@@ -2,12 +2,14 @@
   "name": "tstut",
   "version": "1.0.0",
   "description": "",
-  "main": "./build/server.js",
+  "main": "./build/server.js && build/SocketServer.js",
   "scripts": {
     "compile": "tsc -w",
     "test": "mocha tests/**/*testserver.js --reporter spec",
     "start": "node build/server.js",
+    "startSocket": "concurrently 'tsc -w' 'nodemon -r dotenv/config ./build/SocketServer.js'",
     "devStart": "concurrently 'tsc -w' 'nodemon -r dotenv/config ./build/server.js'"
+
   },
   "author": "",
   "license": "ISC",

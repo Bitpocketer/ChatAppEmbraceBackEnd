@@ -4,7 +4,7 @@ import {UserOrmModel} from '../orms/UserOrmModel';
 import {isAliasAvailable} from "../services/AuthorizationService";
 import * as UserService from '../services/UserService';
 
-export const UserRouter:Router = Router();
+const UserRouter:Router = Router();
 
 UserRouter.post('/api/create', isAliasAvailable(), async(req: Request, res: Response, next: NextFunction) => {
     try{
@@ -85,6 +85,6 @@ UserRouter.post('/guest', (req: Request, res: Response, next: NextFunction) => {
     res.setHeader('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept, x-auth");
     res.json('sending nick back from server ' +req.body.name)
 })
-
+export{UserRouter};
 
 

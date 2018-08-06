@@ -22,7 +22,7 @@ import ConversationItem from "./Views/ConversationItem";
 import $ from 'jquery';
 import {api} from './apiconfig';
 
-let socket = io(api.url+"public", {reconnect: true});
+let socket = io("http://localhost:4000/public", {reconnect: true});
 
 // let socket = io('http://316c3271.ngrok.io');
 
@@ -377,6 +377,7 @@ class App extends Component {
             });
 
         }
+        console.log('emitting nick', user);
         socket.emit('setnick', user);
     }
 
@@ -426,18 +427,18 @@ class App extends Component {
 
         // console.log('sign in here', user);
         $.ajax({
-            url:api.url+'api/authenticate',
+            url:'http://localhost:3000/api/authenticate',
             dataType: 'JSON',
             data: user,
             type: 'POST',
             success: (response) => {
-                // console.log('response from authentication', response);
+                console.log('response from authentication', response);
                 if (response.token != null && typeof  response.token !== 'undefined' && response.token !== "invalid username or password") {
                     let u = {
                         nick: user.name
                     }
                     if (!socket.connected) {
-                        // console.log('socket not connected');
+                        console.log('socket not connected');
                         // socket = io("http://localhost:3000/public");
                         console.log(socket)
                         socket.open((result) => {
@@ -445,7 +446,7 @@ class App extends Component {
                         });
                         this.setState({authenticated: true})
                     }
-
+                    console.log('emitting setnick', u);
                     socket.emit('setnick', u);
                     showconversationview();
                     this.setState({authenticated: true})

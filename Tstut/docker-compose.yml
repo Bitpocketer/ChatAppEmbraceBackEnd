@@ -19,6 +19,25 @@ services:
     links:
         - redis
         - postgres
+  socketserver:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: npm run startSocket
+    image:  "socket:server"
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      REDIS_URL:  'redis://@redis:6379'
+      DATABASE_URL: 'postgres://postgres:@postgres:5432/postgres'
+    volumes:
+      - ./:/app/api
+    ports:
+      - '4000:4000'
+    links:
+      - redis
+      - postgres
+      - api
   redis:
     image: redis
     ports:
@@ -27,15 +46,4 @@ services:
     image: postgres
     ports:
       - '5432:5432'
-
-  mysql:
-      image: mysql:5.6
-      environment:
-        MYSQL_DATABASE: chatter
-        MYSQL_ROOT_PASSWORD: example
-        MYSQL_USER: jawad
-        MYSQL_PASSWORD: embrace
-
-      ports:
-        - '3306:3306'
 
