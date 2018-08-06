@@ -471,7 +471,7 @@ class App extends Component {
             success: (response) => {
                 // console.log('response from user registeration', response);
                 if (response.name === user.name) {
-
+                alert('account for '+user.name+ ' has been created');
                 }
             },
             err: (error) => {
