@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c6d6a92-a1aa-4453-8c15-5215a44198e9" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/Tstut/app/helpers/ChatEventsHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tstut/app/gateways/UserRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/gateways/UserRouter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tstut/app/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tstut/app/helpers/ChatEvents.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tstut/app/services/RedisService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/services/RedisService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tstut/app/services/SocketService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/app/services/SocketService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tstut/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tstut/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Tstut/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-app-frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/chat-app-frontend/src/App.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -25,35 +24,17 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6720">
-              <caret line="448" column="55" selection-start-line="448" selection-start-column="55" selection-end-line="448" selection-end-column="55" />
+            <state relative-caret-position="273">
+              <caret line="137" lean-forward="true" selection-start-line="137" selection-end-line="137" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tstut/app/server.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="9" selection-start-column="9" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SocketServer.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tstut/app/SocketServer.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SocketService.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SocketService.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tstut/app/services/SocketService.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="15" column="68" selection-start-line="15" selection-start-column="68" selection-end-line="15" selection-end-column="68" />
+            <state relative-caret-position="285">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -61,29 +42,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChatEvents.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tstut/app/helpers/ChatEvents.ts">
+      <file leaf-file-name="ChatEventsHandler.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Tstut/app/helpers/ChatEventsHandler.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+            <state relative-caret-position="315">
+              <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tstut/package.json">
+      <file leaf-file-name="RedisService.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tstut/app/services/RedisService.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="16" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="docker-compose.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tstut/docker-compose.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+            <state relative-caret-position="212">
+              <caret line="33" column="82" selection-start-line="33" selection-start-column="82" selection-end-line="33" selection-end-column="82" />
             </state>
           </provider>
         </entry>
@@ -99,8 +71,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>zrem</find>
-      <find>saveinDb</find>
       <find>openmoda</find>
       <find>messages</find>
       <find>register cha</find>
@@ -129,10 +99,17 @@
       <find>connecr</find>
       <find>setnick</find>
       <find>signin</find>
+      <find>aliascreated</find>
+      <find>chatterlist</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -165,19 +142,20 @@
         <option value="$PROJECT_DIR$/Tstut/migrations/20180731140737-coversation-replyTable.js" />
         <option value="$PROJECT_DIR$/chat-app-frontend/src/Views/ConversationItem.js" />
         <option value="$PROJECT_DIR$/Tstut/app/services/ScheduleService.ts" />
-        <option value="$PROJECT_DIR$/Tstut/app/services/RedisService.ts" />
         <option value="$PROJECT_DIR$/chat-app-frontend/src/apiconfig.js" />
         <option value="$PROJECT_DIR$/Tstut/app/services/ConversationService.ts" />
         <option value="$PROJECT_DIR$/Tstut/app/gateways/UserRouter.ts" />
         <option value="$PROJECT_DIR$/Tstut/app/server.ts" />
         <option value="$PROJECT_DIR$/Tstut/build/SocketServer.js" />
         <option value="$PROJECT_DIR$/Tstut/app/gateways/App.ts" />
-        <option value="$PROJECT_DIR$/chat-app-frontend/src/App.js" />
         <option value="$PROJECT_DIR$/Tstut/package.json" />
         <option value="$PROJECT_DIR$/Tstut/docker-compose.yml" />
         <option value="$PROJECT_DIR$/Tstut/app/SocketServer.ts" />
-        <option value="$PROJECT_DIR$/Tstut/app/services/SocketService.ts" />
+        <option value="$PROJECT_DIR$/chat-app-frontend/src/App.js" />
         <option value="$PROJECT_DIR$/Tstut/app/helpers/ChatEvents.ts" />
+        <option value="$PROJECT_DIR$/Tstut/app/services/RedisService.ts" />
+        <option value="$PROJECT_DIR$/Tstut/app/services/SocketService.ts" />
+        <option value="$PROJECT_DIR$/Tstut/app/helpers/ChatEventsHandler.ts" />
       </list>
     </option>
   </component>
@@ -313,7 +291,21 @@
               <item name="Task" type="b2602c69:ProjectViewProjectNode" />
               <item name="Task" type="462c0819:PsiDirectoryNode" />
               <item name="Tstut" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Task" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Task" type="462c0819:PsiDirectoryNode" />
+              <item name="Tstut" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="helpers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Task" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Task" type="462c0819:PsiDirectoryNode" />
+              <item name="Tstut" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -409,12 +401,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="343746000" />
+    <option name="totallyTimeSpent" value="353381000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="1440" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="bottom" id="TypeScript" order="11" weight="0.32917705" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2015504" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -422,35 +415,46 @@
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32917705" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4989429" visible="true" weight="0.36783043" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4989429" weight="0.36783043" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.2817955" />
-    </layout>
-    <layout-to-restore>
-      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32917705" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2015504" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5010571" side_tool="true" weight="0.36783043" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.2817955" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4989429" visible="true" weight="0.36783043" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+    </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2015504" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.16832918" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4989429" weight="0.36783043" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5010571" side_tool="true" weight="0.36783043" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.16832918" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
@@ -504,23 +508,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Tstut/app/services/SocketService.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="15" column="68" selection-start-line="15" selection-start-column="68" selection-end-line="15" selection-end-column="68" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tstut/app/helpers/ChatEvents.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tstut/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -746,13 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tstut/app/services/RedisService.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="727">
-          <caret line="115" column="10" selection-start-line="115" selection-start-column="10" selection-end-line="115" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tstut/build/gateways/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-91" />
@@ -793,17 +773,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tstut/build/SocketServer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="31" column="3" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tstut/app/gateways/App.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="36" column="41" lean-forward="true" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tstut/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="41" column="16" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -814,48 +794,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6720">
-          <caret line="448" column="55" selection-start-line="448" selection-start-column="55" selection-end-line="448" selection-end-column="55" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/Tstut/build/services/SocketService.js">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tstut/package.json">
+    <entry file="file://$PROJECT_DIR$/Tstut/build/SocketServer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tstut/docker-compose.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+        <state relative-caret-position="465">
+          <caret line="31" column="3" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tstut/app/SocketServer.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="555">
+          <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tstut/app/helpers/ChatEvents.ts">
+    <entry file="file://$PROJECT_DIR$/Tstut/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        <state relative-caret-position="150">
+          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tstut/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chat-app-frontend/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="137" lean-forward="true" selection-start-line="137" selection-end-line="137" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tstut/app/services/RedisService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="33" column="82" selection-start-line="33" selection-start-column="82" selection-end-line="33" selection-end-column="82" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tstut/app/services/SocketService.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="15" column="68" selection-start-line="15" selection-start-column="68" selection-end-line="15" selection-end-column="68" />
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tstut/app/helpers/ChatEventsHandler.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
         </state>
       </provider>
     </entry>

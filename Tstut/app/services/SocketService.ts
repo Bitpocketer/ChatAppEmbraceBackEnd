@@ -4,7 +4,7 @@ import {Conversation} from "../models/conversationModel";
 import {Message} from '../models/messagesModel';
 import {MessageOrmModel} from '../orms/MessageOrmModel';
 import {ConversationOrmModel} from "../orms/ConversationOrmModel";
-import * as ChatEvents from '../helpers/ChatEvents';
+import * as ChatEventsHandler from '../helpers/ChatEventsHandler';
 import {knex} from "./DatabaseService";
 export let publicroom;
 module.exports = function (io) {
@@ -13,14 +13,13 @@ module.exports = function (io) {
     console.log('io called');
     //public room events
     publicroom.on('connection',function(socket){
-        console.log('public room connection established',socket.id);
-        publicroom.on('setnick',(user)=>{
-            ChatEvents.setNick(user);
+
+        socket.on('setnick',async (user)=>{
+           await ChatEventsHandler.setNick(user.nick, socket.id, socket);
+           await ChatEventsHandler.sendChattersList(socket);
+
         });
     })
-
-
-
 }
 
 

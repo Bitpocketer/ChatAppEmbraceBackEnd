@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 
 export class RedisService {
     public client: any;
+    private static Instance: RedisService;
 
     public constructor() {
         // console.log('initializing redis client', process.env.REDIS_URL);
@@ -15,47 +16,31 @@ export class RedisService {
         // this.client = redis.createClient();
     }
 
-    async registerChatter(alias: string, socketid?: string) {
+    public static get instance(): any {
+        return this.Instance || (this.Instance = new RedisService())
+    }
 
-        let length = await  this.getListLength('chatters');
-        let chatters = await this.getAllChatters(length);
-        console.log('all chatters in registerchatter', chatters);
-
-
+    public async registerChatter(alias: string, socketid?: string) {
+        let chatters = await this.getAllChatters();
         let users = chatters.map((chatter, index) => {
-            return JSON.parse(chatter);
-        })
-
-        // console.log('user in dropchatterfromredis', users);
-
-        let usertoberemoved = users.filter((user, index) => {
-
-            if (user.user == alias) {
-                return user;
+            chatter = JSON.parse(chatter);
+            if (chatter.user == alias) {
+                return chatter;
             }
-
-        });
-
-
-        if (usertoberemoved.length > 0) {
-            console.log('first remove the user ',alias,' already exists');
-        return  await  this.client.lremAsync("chatters", -1, JSON.stringify(usertoberemoved[0])).then(async (result) => {
-
+        })
+        if (users.length > 0 && typeof users[0]!="undefined") {
             //if user is trying to register for the second time, delete first record of user from redis and reinsert again
-                //after deletion, push the new chatter
-                let chatter = {user: alias, socketid: socketid}
-                 return await this.client.lpushAsync('chatters', JSON.stringify(chatter)).then((res: any) => {
-                    return 'user registered';
-                })
-
-            }).catch((e) => {
-                console.log(e);
+            //after deletion, push the new chatter
+           await  this.client.lremAsync("chatters", -1, JSON.stringify(users[0]));
+            return await this.client.lpushAsync('chatters', JSON.stringify({
+                user: alias,
+                socketid: socketid
+            })).then(() => {
+                return 'user registered';
             })
         } else {
-
             console.log('insert directly');
-            let chatter = {user: alias, socketid: socketid}
-            return this.client.lpushAsync('chatters', JSON.stringify(chatter)).then((res: any) => {
+            return this.client.lpushAsync('chatters', JSON.stringify({user: alias, socketid: socketid})).then(() => {
                 return 'user registered';
             }).catch((e) => {
                 console.log(e);
@@ -73,8 +58,8 @@ export class RedisService {
         })
     }
 
-    async getAllChatters(length: number) {
-
+    async getAllChatters() {
+       let length =  await this.client.llenAsync('chatters').then((res)=>{return res});
         return this.client.lrangeAsync('chatters', 0, length)
     }
 
@@ -154,9 +139,8 @@ export class RedisService {
         // get all chatters from redis
         //map through chatters, find the one with socketid as recieved in arguments
         //drop that out of chatters list
-        let length = await this.getListLength('chatters');
 
-        let chatters = await this.getAllChatters(length);
+        let chatters = await this.getAllChatters();
 
         let users = chatters.map((chatter, index) => {
             return JSON.parse(chatter);

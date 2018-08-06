@@ -124,7 +124,7 @@ class App extends Component {
         this.listenForMessages();
 
         socket.on('aliascreated', function (alias) {
-            // console.log('alias created on server');
+            console.log('alias created on server', alias);
             this.setState({alias: alias}, () => {
                 this.displayChatrooms(alias);
                 this.hidelogin();
@@ -134,7 +134,7 @@ class App extends Component {
         }.bind(this))
 
         socket.on('chatterslist', (chatters) => {
-            // console.log('all chatters on frontend', chatters);
+            console.log('all chatters on frontend', chatters);
 
             chatters.map((chatter, index) => {
                 // console.log(this.doesChatterAlreayExist(chatter));
