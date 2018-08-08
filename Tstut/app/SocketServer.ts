@@ -32,6 +32,9 @@ router.get('/test', (req: express.Request, res: express.Response)=>{
 
 
 app.use('/test',router);
+app.use((error, req, res, next)=>{
+    res.status(error.statusCode || 500).send(error)
+})
 export let server = http.createServer(app);
 let io = require('socket.io')(server);
 

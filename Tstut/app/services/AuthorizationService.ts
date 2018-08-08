@@ -24,6 +24,7 @@ export function isAliasAvailable() {
 
 export async function doesConversationExist(userone: string, usertwo: string) {
     // console.log('called---------888888', userone);
+    return new Promise(async(resolve, reject)=> {
     let conversationExists = false;
 
     await  knex('chatusers')
@@ -52,5 +53,6 @@ export async function doesConversationExist(userone: string, usertwo: string) {
                     })
             }
         })
-    return conversationExists;
+     conversationExists?resolve(conversationExists):reject(conversationExists);
+    })
 }

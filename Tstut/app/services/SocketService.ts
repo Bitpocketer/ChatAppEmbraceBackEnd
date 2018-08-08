@@ -19,6 +19,18 @@ module.exports = function (io) {
            await ChatEventsHandler.sendChattersList(socket);
 
         });
+
+        socket.on('message', (message)=>{
+            ChatEventsHandler.broadcastPublicMessage(message,publicroom);
+        })
+
+        socket.on('privatemessage', async(packet)=> {
+            ChatEventsHandler.sendPrivateMessage(packet, socket);
+        })
+
+        socket.on('disconnect', async()=>{
+            ChatEventsHandler.handleDisconnection(socket.id)
+        })
     })
 }
 
@@ -29,23 +41,7 @@ module.exports = function (io) {
 
 
 
-//
-export async function getIdsOfChatters(userone?: string, usertwo?: string) {
-    // console.log('called---------getidsofchatters', userone||usertwo);
 
-    let ids = await knex('chatusers')
-        .where('name', userone)
-        .orWhere('name', usertwo||userone)
-        .select('id')
-        .then((rows) => {
-            // console.log('rows in the getIds of chatters', rows);
-            // ids = rows;
-            return rows;
-
-        });
-    // console.log('ids in socketservice', ids);
-    return ids;
-}
 
 async function pushMessageIntoDB(message: Message) {
     console.log('message to push into db', message);

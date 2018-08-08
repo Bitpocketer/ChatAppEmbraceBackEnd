@@ -276,7 +276,7 @@ class App extends Component {
 
                         <div className="modal-content">
                             <span className="close" onClick={this.closechatmodal}>&times;</span>
-                            <ul id="messages">
+                            <ul id="pmessages">
                                 {PrivateMessages}
                             </ul>
                             <form className="modalchatform">

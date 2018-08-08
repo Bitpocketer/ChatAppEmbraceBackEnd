@@ -1,13 +1,14 @@
 import {UserOrmModel} from "../orms/UserOrmModel";
 import * as ConversationService from './ConversationService';
 import {User} from "../models/userModel";
-import {getIdsOfChatters} from "../services/SocketService";
+import {Conversation}  from "../models/conversationModel";
 import {stringify} from "querystring";
 
 export async function getUserConversations(alias: string) {
 
     // console.log('getUserConversations called in UserServices', alias);
-    let userId = await getIdsOfChatters(alias);
+    let userId = await Conversation.getIdsOfChatters(alias);
+    console.log('problem is in userService');
      userId = userId[0].id;
      // console.log('userId  in UserService', userId);
      //now get all the conversations of this great user he has been involved in
@@ -40,8 +41,9 @@ export async function getUserOfflineMessages(alias:string) {
 }
 
 export async function getMessages(alias: string, recipient: string) {
+    console.log('problem is in UserService getMessages');
+    let userTwoId = await Conversation.getIdsOfChatters(null, recipient);
 
-    let userTwoId = await getIdsOfChatters(null, recipient);
      // console.log('userTwoids', userTwoId);
     return await ConversationService.messagesBetweenUserAndRecipient(alias, userTwoId[0].id);
 }

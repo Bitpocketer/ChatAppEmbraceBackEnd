@@ -22,30 +22,22 @@ export class RedisService {
 
     public async registerChatter(alias: string, socketid?: string) {
         let chatters = await this.getAllChatters();
-        let users = chatters.map((chatter, index) => {
-            chatter = JSON.parse(chatter);
-            if (chatter.user == alias) {
-                return chatter;
+        let users = chatters.find((chatter, index) => {
+            if(JSON.parse(chatter).user == alias){
+                return  JSON.parse(chatter);
             }
         })
-        if (users.length > 0 && typeof users[0]!="undefined") {
+        console.log('users', users);
+        if (typeof users!= "undefined" && users!=undefined) {
             //if user is trying to register for the second time, delete first record of user from redis and reinsert again
             //after deletion, push the new chatter
-           await  this.client.lremAsync("chatters", -1, JSON.stringify(users[0]));
-            return await this.client.lpushAsync('chatters', JSON.stringify({
-                user: alias,
-                socketid: socketid
-            })).then(() => {
-                return 'user registered';
-            })
-        } else {
-            console.log('insert directly');
-            return this.client.lpushAsync('chatters', JSON.stringify({user: alias, socketid: socketid})).then(() => {
-                return 'user registered';
-            }).catch((e) => {
-                console.log(e);
-            })
+            await  this.client.lremAsync("chatters", -1, users);
         }
+        return this.client.lpushAsync('chatters', JSON.stringify({user: alias, socketid: socketid})).then(() => {
+            return 'user registered';
+        }).catch((e) => {
+            console.log('error in registering user',e);
+        })
     }
 
 
@@ -59,8 +51,29 @@ export class RedisService {
     }
 
     async getAllChatters() {
-       let length =  await this.client.llenAsync('chatters').then((res)=>{return res});
+        let length = await this.client.llenAsync('chatters').then((res) => {
+            return res
+        });
         return this.client.lrangeAsync('chatters', 0, length)
+    }
+
+    async getRecipient(recipient) {
+        console.log('user to find', recipient);
+        return new Promise(async (resolve, reject)=>{
+
+           let chatters = await this.getAllChatters();
+           let reciver = chatters.find((user, index)=>{
+               if (recipient == JSON.parse(user).user) {
+                   return JSON.parse(user);
+               }
+           })
+            console.log('reciever from array', reciver);
+            if(JSON.parse(reciver).user===recipient) {
+               resolve(JSON.parse(reciver));
+            } else {
+               reject("not found");
+            }
+        })
     }
 
     async removeChattersFromRedis() {
@@ -99,18 +112,12 @@ export class RedisService {
     }
 
     async getAllMessages() {
-        // let messageLength = await this.getListLength('messages')
-        // return this.client.lrangeAsync('messages',0, messageLength).then((res: any)=>{
-        //     return res;
-        // });
-        //remove it later,
-
         return this.client.zrangeAsync('messagesset', 0, -1).then(res => {
             return res;
         })
-
-
     }
+
+
 
     async updateMessageStatus(message) {
         console.log('message in updateMessagesStatus', message);
@@ -129,25 +136,19 @@ export class RedisService {
                 });
             }
         });
-
-
     }
 
-    //drop particular user from redis upon disconnection
     async dropChatterFromRedis(socketid: string) {
 
         // get all chatters from redis
         //map through chatters, find the one with socketid as recieved in arguments
         //drop that out of chatters list
-
         let chatters = await this.getAllChatters();
-
         let users = chatters.map((chatter, index) => {
             return JSON.parse(chatter);
         })
 
         // console.log('user in dropchatterfromredis', users);
-
         let usertoberemoved = users.filter((user, index) => {
 
             if (user.socketid == socketid) {
