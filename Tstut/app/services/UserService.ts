@@ -8,7 +8,7 @@ export async function getUserConversations(alias: string) {
 
     // console.log('getUserConversations called in UserServices', alias);
     let userId = await Conversation.getIdsOfChatters(alias);
-    console.log('problem is in userService');
+    // console.log('problem is in userService');
      userId = userId[0].id;
      // console.log('userId  in UserService', userId);
      //now get all the conversations of this great user he has been involved in
@@ -41,7 +41,7 @@ export async function getUserOfflineMessages(alias:string) {
 }
 
 export async function getMessages(alias: string, recipient: string) {
-    console.log('problem is in UserService getMessages');
+    // console.log('problem is in UserService getMessages');
     let userTwoId = await Conversation.getIdsOfChatters(null, recipient);
 
      // console.log('userTwoids', userTwoId);

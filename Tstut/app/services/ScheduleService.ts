@@ -7,7 +7,7 @@ export function scheduleJob(messages) {
 
     var j = worker.scheduleJob('*/1 * * * *  ', async function () {
 
-        console.log('job is executed after ever minute');
+        // console.log('job is executed after ever minute');
 
         //get all conversations from reds and copy into database
         let messages = await new RedisService().getAllMessages()
@@ -21,19 +21,19 @@ export function scheduleJob(messages) {
                 return u;
             }
         })
-        console.log('ready to insert', readytoinsert);
+        // console.log('ready to insert', readytoinsert);
         if (readytoinsert.length != 0) {
 
             let messagesDb = readytoinsert.map((m, index) => {
                 let u = JSON.parse(m);
                 u = _.pick(u, validFields);
-                console.log('returning u', u);
+                // console.log('returning u', u);
                 return u;
 
             })
 
             let values = "";
-            console.log('messagesDb', messagesDb);
+            // console.log('messagesDb', messagesDb);
             let v = messagesDb.map(async (m, index) => {
                 if (index != messagesDb.length - 1) {
                     m.message = escape(m.message);
@@ -46,10 +46,10 @@ export function scheduleJob(messages) {
             })
 
             Promise.all(v).then(() => {
-                console.log('generated values', values);
+                // console.log('generated values', values);
                 knex.raw('insert into conversation_reply (message, ip, time, status, c_id, sender, recipient)  values ' + values)
                     .then(async () => {
-                        console.log('record inserted')
+                        // console.log('record inserted')
                         let messagesbackup = await  new RedisService().getAllMessages();
 
 
@@ -61,7 +61,7 @@ export function scheduleJob(messages) {
                         })
 
                         Promise.all(updatedredisrecord).then(() => {
-                            console.log('updated records in redis')
+                            // console.log('updated records in redis')
                         })
 
 

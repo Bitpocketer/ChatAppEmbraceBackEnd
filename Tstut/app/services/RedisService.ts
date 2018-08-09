@@ -68,9 +68,10 @@ export class RedisService {
                }
            })
             console.log('reciever from array', reciver);
-            if(JSON.parse(reciver).user===recipient) {
+            if(typeof reciver !='undefined' && JSON.parse(reciver).user===recipient) {
                resolve(JSON.parse(reciver));
             } else {
+                console.log('rejecting get REcipient');
                reject("not found");
             }
         })

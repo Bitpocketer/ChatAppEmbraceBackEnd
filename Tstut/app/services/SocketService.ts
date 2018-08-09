@@ -25,7 +25,12 @@ module.exports = function (io) {
         })
 
         socket.on('privatemessage', async(packet)=> {
-            ChatEventsHandler.sendPrivateMessage(packet, socket);
+            try {
+                await ChatEventsHandler.sendPrivateMessage(packet, socket);
+
+            } catch(err){
+                console.log('error in socket service on privateMessage', err);
+            }
         })
 
         socket.on('disconnect', async()=>{
@@ -58,18 +63,6 @@ async function pushMessageIntoDB(message: Message) {
     }
 }
 
-async function getConversationOfChatters(userone: number, usertwo: number) {
 
-    return await knex('conversation')
-        .where('user_one', userone)
-        .andWhere('user_two', usertwo)
-        .orWhere('user_one', usertwo)
-        .andWhere('user_two', userone)
-        .select('id')
-        .then((rows) => {
-            console.log('conversations', rows);
-            return rows;
-        })
-}
 
 

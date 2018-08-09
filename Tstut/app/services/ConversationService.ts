@@ -34,7 +34,7 @@ export async  function testgetConversationOfUser(userid: number) : Promise<any> 
         ' where user_one = '+ userid.toString() +' or user_two = '+ userid.toString()
 
     ).then( async (result)=>{
-        console.log('result of raw query', result.rows);
+        // console.log('result of raw query', result.rows);
         // return result.rows;
 
        let conversationz = await result.rows.map (async (converse,index) => {

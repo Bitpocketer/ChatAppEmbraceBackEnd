@@ -1,51 +1,73 @@
 import {RedisService} from '../services/RedisService';
 import {doesConversationExist} from "../services/AuthorizationService";
-import {Conversation}from '../models/conversationModel';
-export function  privateMessage(message) {
-    console.log('private message recieved', message);
-}
+import {Conversation} from '../models/conversationModel';
+import {messagesBetweenUserAndRecipient} from "../services/ConversationService";
 
-export async function setNick(user: any, socketid: string, socket: any){
+export async function setNick(user: any, socketid: string, socket: any) {
 
-      await RedisService.instance.registerChatter(user, socketid);
-      socket.emit('aliascreated', user);
+    await RedisService.instance.registerChatter(user, socketid);
+    socket.emit('aliascreated', user);
 }
 
 export async function sendChattersList(socket: any) {
     let chatterlist = await RedisService.instance.getAllChatters();
-    chatterlist = chatterlist.map((user, index)=>{
-         user = JSON.parse(user);
+    chatterlist = chatterlist.map((user, index) => {
+        user = JSON.parse(user);
         return user.user;
     });
     socket.emit('chatterslist', chatterlist);
 }
-export async function sendPrivateMessage(packet: any, socket: any) {
+
+
+export async function sendPrivateMessage(packet, socket) {
     try {
-        //query redis if the redis has user that means user is online, send message to the online user
-        let recipient = await RedisService.instance.getRecipient(packet.recipient);
-        console.log('found recipient in resolved promise', recipient);
-        socket.broadcast.to(recipient.socketid).emit('privatemessage', packet);
-        try{
-            await doesConversationExist(packet.recipient, packet.sender);
-
-        } catch(e) {
-            //IF CONVERSATION DOES NOT EXIST, CREATE ONE AND PUSH IT ONTO DB
-          await  Conversation.saveConversation(packet.sender, packet.recipient, packet);
-
+        console.log('send private mesage called');
+        let receiver = await getReceiverFromRedis(packet);
+        console.log('reciever offline', receiver);
+        if (receiver != false && receiver != null) {
+            console.log('executing for online user');
+            if (await getConversationFromDatabase(packet)) {
+                packet.c_id = await Conversation.saveConversation(packet.sender, packet.recipient, packet, false);
+            } else {
+                packet.c_id = await Conversation.saveConversation(packet.sender, packet.recipient, packet, true);
+                sendConversationCreatedNotificationToClient(socket, packet);
+            }
+            socket.broadcast.to(receiver.socketid).emit('privatemessage', packet);
+        } else {
+            //USER IS OFFLINE  THAT MEANS HE ALREADY HAS CONVERSATION WITH RECIPIENT HANDLE IT HERE UPDATE EXISTING CONVERSATION
+            packet.c_id = await Conversation.saveConversation(packet.sender, packet.recipient, packet, false);
         }
-        //all that is left now is
-        //creating conversation if one doesn't exist
-        //storing messages in redis
-        //storing messages in database
-        //scheduler for copying messages from redis to database
+    } catch (err) {
+        console.log('error in send message', err);
 
-
-    } catch(e) {
-        //if user is not online
-        console.log('rejected promise result', e);
     }
 }
-export async function broadcastPublicMessage(message,socket: any) {
+
+function sendConversationCreatedNotificationToClient(socket, packet) {
+    setTimeout(() => {
+        socket.emit('conversationcreated', packet)
+    }, 2000);
+}
+
+async function getReceiverFromRedis(packet) {
+    try {
+        return await RedisService.instance.getRecipient(packet.recipient);
+    } catch (err) {
+        console.log('not found in getRecieverfromRedis', err);
+        return false;
+    }
+}
+
+async function getConversationFromDatabase(packet) {
+    try {
+        return await doesConversationExist(packet.recipient, packet.sender);
+
+    } catch (err) {
+        return false;
+    }
+}
+
+export async function broadcastPublicMessage(message, socket: any) {
     console.log('broadcast this message to public room', message);
     socket.emit('message', message);
 }

@@ -3,6 +3,8 @@ import {knex} from "../services/DatabaseService";
 import {ConversationOrmModel} from "../orms/ConversationOrmModel";
 import {Message} from "./messagesModel";
 import {RedisService} from "../services/RedisService";
+import {type} from "os";
+import {getConversationOfUser} from "../services/ConversationService";
 
 export class Conversation {
     user_one: number;
@@ -38,21 +40,30 @@ export class Conversation {
         }
     }
 
-    static async saveConversation(sender, recipient, packet): Promise<any>{
+    static async saveConversation(sender: string , recipient: string, packet: any, saveIntoDb): Promise<any>{
 
-        // let ids = await this.getIdsOfChatters(sender, recipient).then(res=>{return res}).catch(e=>console.log('get ids error', e));
-        // let user1 = ids[0].id; let user2 = ids[1].id;
-        let convertsation = this.createConversation(1, 22,1,);
+        let ids = await this.getIdsOfChatters(sender, recipient).then(res=>{return res}).catch(e=>console.log('get ids error', e));
+        let user1 = ids[0].id; let user2 = ids[1].id;
+        let conversationid;
+        //PUSH CONVERSATION INTO DATABASE
+        if(saveIntoDb) {
+            let convertsation = this.createConversation(user1, user2, 1,);
+            let conversationidarray = await new ConversationOrmModel(convertsation).save().then((converse)=>{
+                let cid = Conversation.fromDB(converse.toJSON())
+                return cid;
+            });
+            conversationid = conversationidarray.id;
+        }
 
-        let conversationidarray = await new ConversationOrmModel(convertsation).save().then((converse)=>{
-            let cid = Conversation.fromDB(converse.toJSON())
-            return cid;
-        });
-        let conversationid = conversationidarray.id;
+        if(conversationid===null || typeof conversationid==='undefined') {
+            conversationid = await this.getConversationOfChatters(user1, user2);
+            conversationid = conversationid[0].id;
+        }
+
         let message = Message.createMessage(packet.message, "192.168.1.1", new Date(), 1, conversationid,sender,recipient);
-        //save message in redis
-        let redissatatus= await RedisService.instance.messagesQueue(message);
-        console.log('redis status', redissatatus);
+        //SAVE MESSAGE INTO REDIS
+        await RedisService.instance.messagesQueue(message);
+        return conversationid;
     }
 
     public static async getIdsOfChatters(userone?: string, usertwo?: string) {
@@ -72,6 +83,33 @@ export class Conversation {
             });
         // console.log('ids in socketservice', ids);
         return ids;
+    }
+
+    public static async  updateExistingConversationIntoRedis(sender: string, recipient: string, packet:any) {
+        let ids = await this.getIdsOfChatters(sender, recipient).then(res=>{return res}).catch(e=>console.log('get ids error', e));
+        let user1 = ids[0].id; let user2 = ids[1].id;
+        let conversation = await this.getConversationOfChatters(user1, user2);
+        let message = Message.createMessage(packet.messages, "192.168.1.1", new Date(), 1,conversation[0].id, packet.sender, packet.recipient);
+
+        //PUSH MESSAGE INTO REDIS
+        await RedisService.instance.messagesQueue(message);
+
+        return  conversation[0].id;
+
+    }
+
+    static async getConversationOfChatters(userone: number, usertwo: number) {
+
+        return await knex('conversation')
+            .where('user_one', userone)
+            .andWhere('user_two', usertwo)
+            .orWhere('user_one', usertwo)
+            .andWhere('user_two', userone)
+            .select('id')
+            .then((rows) => {
+                console.log('conversations', rows);
+                return rows;
+            })
     }
 }
 

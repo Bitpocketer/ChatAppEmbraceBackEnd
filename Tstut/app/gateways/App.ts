@@ -33,7 +33,7 @@ app.use(cors());
 app.use(AuthenticationRouter);
 app.use(UserRouter);
 app.use('/redis', RedisRouter);
-// scheduleJob("testmessages");
+scheduleJob("testmessages");
 app.get('/test',(req:express.Request, res: express.Response)=>{
     res.send('working '+Date());
 })
